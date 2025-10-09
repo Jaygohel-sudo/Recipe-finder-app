@@ -48,14 +48,18 @@ const App = () => {
 
   if (isCheckingAuth) return <LoadingSpinner />;
 
+  const showNav = isAuthenticated && user?.isVerified;
+
   return (
     <div
       className="min-h-screen bg-gradient-to-br 
     from-gray-900 via-green-900 to-emerald-900 flex items-center justify-center relative overflow-hidden"
     >
-      <div className="fixed top-0 left-0">
-        <Nav collapsed={collapsed} toggleCollapse={toggleCollapse} />
-      </div>
+      {showNav && (
+        <div className="fixed top-0 left-0">
+          <Nav collapsed={collapsed} toggleCollapse={toggleCollapse} />
+        </div>
+      )}
       <FloatingShape
         color="bg-green-500"
         size="w-64 h-64"
@@ -79,7 +83,7 @@ const App = () => {
       />
       <div
         className={`relative z-1 transition-all duration-300 flex-1 flex items-center justify-center p-6 ${
-          collapsed ? "ml-20" : "ml-64"
+          showNav ? (collapsed ? "ml-20" : "ml-64") : ""
         }`}
       >
         <Routes>
@@ -143,8 +147,8 @@ const App = () => {
               </RedirectAuthenticatedUser>
             }
           />
-          <Route path="*" element={<Navigate to="/" replace />} />
           <Route path="/verify-email" element={<EmailVerification />} />
+          <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
       </div>
       <Toaster />
