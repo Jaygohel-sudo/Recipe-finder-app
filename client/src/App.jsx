@@ -143,6 +143,7 @@ const App = () => {
               </RedirectAuthenticatedUser>
             }
           />
+          <Route path="*" element={<Navigate to="/" replace />} />
           <Route path="/verify-email" element={<EmailVerification />} />
         </Routes>
       </div>
