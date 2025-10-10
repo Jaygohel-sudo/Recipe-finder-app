@@ -1,23 +1,30 @@
-import { MailtrapClient } from "mailtrap";
-import dotenv from 'dotenv'
-dotenv.config()
+// utils/sendEmail.js
+import Brevo from "@getbrevo/brevo";
+import dotenv from "dotenv";
 
-const TOKEN = process.env.MAILTRAP_TOKEN ;
+dotenv.config();
 
+export const sendEmail = async (to, subject, content) => {
+  try {
+    const apiInstance = new Brevo.TransactionalEmailsApi();
+    apiInstance.setApiKey(
+      Brevo.TransactionalEmailsApiApiKeys.apiKey,
+      process.env.BREVO_API_KEY
+    );
 
+    const sendSmtpEmail = {
+      sender: {
+        email: process.env.FROM_EMAIL || "no-reply@brevo.com",
+        name: "Recipe Finder",
+      },
+      to: [{ email: to }],
+      subject: subject,
+      htmlContent: `<html><body>${content}</body></html>`,
+    };
 
-
-export const mailtrapClient = new MailtrapClient({
-
-  token: TOKEN,
-
-});
-
-
-export const sender = {
-
-  email: "hello@demomailtrap.co",
-
-  name: "Mailtrap Test",
-
+    const response = await apiInstance.sendTransacEmail(sendSmtpEmail);
+    console.log("✅ Email sent:", response.messageId);
+  } catch (error) {
+    console.error("❌ Email failed:", error.message || error);
+  }
 };
