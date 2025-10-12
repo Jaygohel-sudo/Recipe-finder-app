@@ -3,6 +3,7 @@ import bcrypt from "bcryptjs";
 import crypto from "crypto";
 import { generateTokenAndSetCookie } from "../utils/generateTokenAndSetCookie.js";
 import {
+  sendPasswordResetEmail,
   sendResetSuccessEmail,
   sendVerificationEmail,
 } from "../mailtrap/emails.js";

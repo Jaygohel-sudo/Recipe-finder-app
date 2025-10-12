@@ -14,6 +14,8 @@ import RecipeDetail from "./components/RecipeDetail";
 import HomePageLinks from "./components/HomePageLinks";
 import SearchLetter from "./components/SearchLetter";
 import SavedRecipe from "./components/SavedRecipe";
+import ForgotPassword from "./components/ForgotPassword";
+import ResetPassword from "./components/ResetPassword";
 
 //protect routes that require authentication
 
@@ -148,6 +150,23 @@ const App = () => {
             }
           />
           <Route path="/verify-email" element={<EmailVerification />} />
+          <Route
+            path="/forgot-password"
+            element={
+              <RedirectAuthenticatedUser>
+                <ForgotPassword />
+              </RedirectAuthenticatedUser>
+            }
+          />
+          <Route
+            path="/reset-password/:token"
+            element={
+              <RedirectAuthenticatedUser>
+                <ResetPassword />
+              </RedirectAuthenticatedUser>
+            }
+          />
+
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
       </div>
