@@ -10,7 +10,10 @@ const RecipeDetail = () => {
   const [saved, setSaved] = useState(false);
 
   const { user } = useAuthStore();
-  const API_URL = "http://localhost:5000/api/auth";
+  const API_URL =
+    import.meta.env.MODE === "development"
+      ? "http://localhost:5000/api/auth"
+      : "/api/auth";
 
   useEffect(() => {
     const fetchRecipes = async () => {
