@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 60" width="60" height="60" style="color:#16a34a">
+  <title>MealMagic Icon</title>
+  <desc>Letter M inside a circle badge, perfectly centered</desc>
+
+  <!-- Circle background -->
+  <circle cx="30" cy="30" r="28" stroke="white" stroke-width="4" fill="none"/>
+
+  <!-- Centered M -->
+  <text x="30" y="33"
+        text-anchor="middle"
+        dominant-baseline="middle"
+        font-family="Poppins, 'Segoe UI', sans-serif"
+        font-weight="700"
+        font-size="45"
+        fill="white">M</text> 
+</svg>

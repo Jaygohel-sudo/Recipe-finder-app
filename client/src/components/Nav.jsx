@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 const Navbar = ({ collapsed, toggleCollapse }) => {
   const { logout } = useAuthStore();
   const navigate = useNavigate();
+  const [isHover, setIsHover] = useState(false);
 
   const handleSavedRecipes = async (e) => {
     e.preventDefault();
@@ -42,16 +43,31 @@ const Navbar = ({ collapsed, toggleCollapse }) => {
           collapsed ? "justify-center" : "justify-between"
         }`}
       >
-        <h1
-          className={`text-2xl font-bold transition-all duration-300 ${
-            collapsed ? "opacity-0 hidden" : "opacity-100 "
-          }`}
+        <div
+          onMouseEnter={() => setIsHover(true)}
+          onMouseLeave={() => setIsHover(false)}
+          className="size-10 flex items-center justify-center"
         >
-          Recipe
-        </h1>
+          {collapsed ? (
+            isHover ? (
+              <button
+                onClick={toggleCollapse}
+                className={`p-2 rounded-md bg-gray-100/20 transition`}
+              >
+                <Menu size={24} />
+              </button>
+            ) : (
+              <img src="/recipe.svg" alt="logo" className="size-10" />
+            )
+          ) : (
+            <img src="/recipe.svg" alt="logo" className="size-10" />
+          )}
+        </div>
         <button
           onClick={toggleCollapse}
-          className={`p-2 rounded-md hover:bg-gray-800 transition `}
+          className={`p-2 rounded-md hover:bg-gray-100/20 transition ${
+            collapsed ? "hidden" : "block"
+          }`}
         >
           <Menu size={24} />
         </button>

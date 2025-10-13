@@ -13,6 +13,8 @@ const ResetPassword = () => {
   const { resetPassword, error, isLoading, message } = useAuthStore();
   const { token } = useParams();
   const navigate = useNavigate();
+  const passwordRegex =
+    /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^A-Za-z\d]).{6,}$/;
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -52,6 +54,7 @@ const ResetPassword = () => {
               setPassword(e.target.value);
             }}
             required
+            pattern={passwordRegex}
           />
           <Input
             icon={Lock}
@@ -62,6 +65,7 @@ const ResetPassword = () => {
               setConfirmPassword(e.target.value);
             }}
             required
+            pattern={passwordRegex}
           />
           <motion.button
             className="mt-5 w-full py-3 px-4 bg-gradient-to-r from-blue-500 to-emerald-600 text-white text-xl font-bold rounded-lg shadow-lg hover:from-green-600 hover:to-blue-700 focus:outline-none focus:ring-3 focus:ring-green-100 focus:ring-offset-4 focus:ring-offset-gray-900 transition duration-200"
